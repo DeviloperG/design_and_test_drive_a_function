@@ -35,6 +35,9 @@ def task_master(text):
 
         if #TODO not present in text
             return "No outstanding tasks to do."
+        
+        if TODO present in text
+            return "This might be an outstanding task: {text}."
 
     Side effects: (state any side effects)
         This function doesn't print anything or have any other side-effects
@@ -44,52 +47,75 @@ def task_master(text):
 
 ## 3. Create Examples as Tests
 
+
+
 _Make a list of examples of what the function will take and return._
 
 ```python
 # EXAMPLE
 
 """
-Given a string with #TODO included
-It returns the return "Your outstanding task is: {text}."
+Given a string with #TODO included at the beginning.
+It returns "Your outstanding task is: {text}."
 """
-extract_uppercase("hello WORLD") => ["WORLD"]
+task_master("#TODO buy eggs") => "Your outstanding task is: #TODO buy eggs"
 
 """
-Given two uppercase words
-It returns a list with both words
+Given a string without #TODO included
+It returns "No outstanding tasks to do."
 """
-extract_uppercase("HELLO WORLD") => ["HELLO", "WORLD"]
+task_master("Buy eggs") => "No outstanding tasks to do."
 
 """
-Given two lowercase words
-It returns an empty list
+Given an empty string.
+It returns "No outstanding tasks to do."
 """
-extract_uppercase("hello world") => []
+task_master(" ") => "No outstanding tasks to do."
 
 """
-Given a lower and a mixed case word
-It returns an empty list
+Given a non-string argument, stringify the argument
+Returns "No outstanding tasks to do."
 """
-extract_uppercase("hello WoRLD") => []
+task_master(12345) => "No outstanding tasks to do."
 
 """
-Given a lowercase word and an uppercase word with an exclamation mark
-It returns a list with the uppercase word, no exclamation mark
+Given a string with #TODO included at the end.
+It returns "Your outstanding task is: {text}."
 """
-extract_uppercase("hello WORLD!") => ["WORLD"]
+task_master("buy sausages #TODO") => "Your outstanding task is: buy sausages #TODO"
 
 """
-Given an empty string
-It returns an empty list
+Given a string with #TODO included within it.
+It returns "Your outstanding task is: {text}."
 """
-extract_uppercase("") => []
+task_master("I need #TODO my homework.") => "Your outstanding task is: I need #TODO my homework."
 
 """
-Given a None value
-It throws an error
+Given a string with multiple #TODO included within it.
+It returns "Your outstanding task is: {text}."
 """
-extract_uppercase(None) throws an error
+task_master("#TODO I need #TODO my homework.") => "Your outstanding task is: #TODO I need #TODO my homework."
+
+"""
+Given a string with TODO (missing #) included at the end.
+It returns "Your outstanding task is: {text}."
+"""
+task_master("buy sausages TODO") => "This might be an outstanding task: buy sausages TODO"
+
+"""
+Given a string with #todo (lowercase) included at the end.
+It returns "Your outstanding task is: {text}."
+"""
+task_master("buy eggs #todo") => "Your outstanding task is: buy eggs #todo"
+
+"""
+Given a string with #TodO (mixed case) included at the end.
+It returns "Your outstanding task is: {text}."
+"""
+task_master("buy eggs #TodO") => "Your outstanding task is: buy eggs #TodO"
+
+
+
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
