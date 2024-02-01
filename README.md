@@ -53,7 +53,7 @@ _Make a list of examples of what the function will take and return._
 
 ```python
 # EXAMPLE
-
+def test_given_expected_string_format():
 """
 Given a string with #TODO included at the beginning.
 It returns "Your outstanding task is: {text}."
