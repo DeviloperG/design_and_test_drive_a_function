@@ -60,54 +60,59 @@ It returns "Your outstanding task is: {text}."
 """
 task_master("#TODO buy eggs") => "Your outstanding task is: #TODO buy eggs"
 
+def test_given_string_missing_hashtag_todo():
 """
 Given a string without #TODO included
 It returns "No outstanding tasks to do."
 """
 task_master("Buy eggs") => "No outstanding tasks to do."
 
+def test_given_empty_string():
 """
 Given an empty string.
 It returns "No outstanding tasks to do."
 """
 task_master(" ") => "No outstanding tasks to do."
 
+def test_given_non_string():
 """
 Given a non-string argument, stringify the argument
 Returns "No outstanding tasks to do."
 """
 task_master(12345) => "No outstanding tasks to do."
 
+def test_given_hashtag_todo_at_end():
 """
 Given a string with #TODO included at the end.
 It returns "Your outstanding task is: {text}."
 """
 task_master("buy sausages #TODO") => "Your outstanding task is: buy sausages #TODO"
 
+def test_given_hashtag_todo_within_string():
 """
 Given a string with #TODO included within it.
 It returns "Your outstanding task is: {text}."
 """
 task_master("I need #TODO my homework.") => "Your outstanding task is: I need #TODO my homework."
-
+def test_given_multiple_hashtag_todo():
 """
 Given a string with multiple #TODO included within it.
 It returns "Your outstanding task is: {text}."
 """
 task_master("#TODO I need #TODO my homework.") => "Your outstanding task is: #TODO I need #TODO my homework."
-
+def test_given_string_with_todo_no_hashtag():
 """
 Given a string with TODO (missing #) included at the end.
 It returns "Your outstanding task is: {text}."
 """
 task_master("buy sausages TODO") => "This might be an outstanding task: buy sausages TODO"
-
+def test_given_hashtag_todo_lowercase_and_at_end():
 """
 Given a string with #todo (lowercase) included at the end.
 It returns "Your outstanding task is: {text}."
 """
 task_master("buy eggs #todo") => "Your outstanding task is: buy eggs #todo"
-
+def test_given_hashtag_todo_mixed_case_and_at_end():
 """
 Given a string with #TodO (mixed case) included at the end.
 It returns "Your outstanding task is: {text}."
